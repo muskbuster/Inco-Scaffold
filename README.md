@@ -1,23 +1,47 @@
-# 🏗 Scaffold-ETH 2
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+## FEATURES
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+### Contract Section
+Built using Hardhat-Ts
+| Feature | Available |
+| :---: | :---: |
+| Build Contract |  ✅|
+| Format Contract |  |
+| Run custom scripts | ✅ |
+| Deploy Contract | ✅ |
+| Devnet spin up |  |
+| Burner wallets for debugging |  |
+| gentry faucet |  |
+| TFHE wiki |  |
+| Slither SA|  |
+| Subgraph setup| |
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, Viem, and Typescript.
+### UI Section
+Built using Nextjs , ethersjs ,fhevmjs and typescript
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+| Feature | Available |
+| :---: | :---: |
+| Connect button & Custom Wallet Modal | ✅ |
+|fhEVM instance |✅ |
+| Encryption and Reencryption flow | ✅ |
+| Address bar  |  |
+| modal to copy/disconnect/view account |  |
+| Display account balance |  |
+| Switch/display network |  |
+| App Light/Dark mode |  |
+| Burner wallet UI|  |
+| Read Contract Hook | |
+|Write contract Hook| |
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/b237af0c-5027-4849-a5c1-2e31495cccb1)
 
-## Requirements
+### Template Smart Contracts 
+| Feature | Available |
+| :---: | :---: |
+| Confidential Governance | |
+| Confidential ERC20 |✅ |
+| Blind Vault | |
+| FHE-Casino Contracts | ✅ |
+| RNG contract | |
 
 Before you begin, you need to install the following tools:
 
