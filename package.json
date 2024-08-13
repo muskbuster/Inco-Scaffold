@@ -5,23 +5,24 @@
   "workspaces": {
     "packages": [
       "packages/hardhat",
-      "packages/nextjs"
+      "packages/nextjs",
+      "packages/Hardhat"
     ]
   },
   "scripts": {
-    "account": "yarn workspace @se-2/hardhat account",
-    "chain": "yarn workspace @se-2/hardhat chain",
-    "fork": "yarn workspace @se-2/hardhat fork",
-    "deploy": "yarn workspace @se-2/hardhat deploy",
-    "verify": "yarn workspace @se-2/hardhat verify",
-    "hardhat-verify": "yarn workspace @se-2/hardhat hardhat-verify",
-    "compile": "yarn workspace @se-2/hardhat compile",
-    "generate": "yarn workspace @se-2/hardhat generate",
-    "flatten": "yarn workspace @se-2/hardhat flatten",
-    "hardhat:lint": "yarn workspace @se-2/hardhat lint",
-    "hardhat:lint-staged": "yarn workspace @se-2/hardhat lint-staged",
-    "hardhat:format": "yarn workspace @se-2/hardhat format",
-    "hardhat:test": "yarn workspace @se-2/hardhat test",
+    "account": "yarn workspace @se-2/Hardhat account",
+    "chain": "yarn workspace @se-2/Hardhat chain",
+    "fork": "yarn workspace @se-2/Hardhat fork",
+    "deploy": "yarn workspace @se-2/Hardhat deploy",
+    "verify": "yarn workspace @se-2/Hardhat verify",
+    "hardhat-verify": "yarn workspace @se-2/Hardhat hardhat-verify",
+    "compile": "yarn workspace @se-2/Hardhat compile",
+    "generate": "yarn workspace @se-2/Hardhat generate",
+    "flatten": "yarn workspace @se-2/Hardhat flatten",
+    "hardhat:lint": "yarn workspace @se-2/Hardhat lint",
+    "hardhat:lint-staged": "yarn workspace @se-2/Hardhat lint-staged",
+    "hardhat:format": "yarn workspace @se-2/Hardhat format",
+    "hardhat:test": "yarn workspace @se-2/Hardhat test",
     "test": "yarn hardhat:test",
     "format": "yarn next:format && yarn hardhat:format",
     "start": "yarn workspace @se-2/nextjs dev",
