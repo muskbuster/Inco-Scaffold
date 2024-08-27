@@ -2839,6 +2839,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@se-2/Nextjs@workspace:packages/Nextjs":
+  version: 0.0.0-use.local
+  resolution: "@se-2/Nextjs@workspace:packages/Nextjs"
+  dependencies:
+    "@privy-io/react-auth": ^1.76.4
+    "@radix-ui/react-dropdown-menu": ^2.1.1
+    "@radix-ui/react-slot": ^1.1.0
+    class-variance-authority: ^0.7.0
+    clsx: ^2.1.1
+    eslint: ^8
+    eslint-config-next: 14.2.5
+    ethers: ^5.7.2
+    fhevmjs: ^0.4.0-3
+    lucide-react: ^0.417.0
+    next: 14.2.5
+    next-themes: ^0.3.0
+    postcss: ^8
+    react: ^18
+    react-dom: ^18
+    sonner: ^1.5.0
+    tailwind-merge: ^2.4.0
+    tailwindcss: ^3.4.1
+    tailwindcss-animate: ^1.0.7
+  languageName: unknown
+  linkType: soft
+
 "@se-2/hardhat@workspace:packages/hardhat":
   version: 0.0.0-use.local
   resolution: "@se-2/hardhat@workspace:packages/hardhat"
@@ -12018,32 +12044,6 @@ __metadata:
   checksum: deac9f8d00eda7b2e5cd1b2549e26e10a0faa70adaa6fdadca701cc55f49ee9018e427f424bac0c790b7c7e2d3068db97f3093f1093975f2acb8f8818b936ed9
   languageName: node
   linkType: hard
-
-"next-fhevm-template@workspace:packages/Nextjs":
-  version: 0.0.0-use.local
-  resolution: "next-fhevm-template@workspace:packages/Nextjs"
-  dependencies:
-    "@privy-io/react-auth": ^1.76.4
-    "@radix-ui/react-dropdown-menu": ^2.1.1
-    "@radix-ui/react-slot": ^1.1.0
-    class-variance-authority: ^0.7.0
-    clsx: ^2.1.1
-    eslint: ^8
-    eslint-config-next: 14.2.5
-    ethers: ^5.7.2
-    fhevmjs: ^0.4.0-3
-    lucide-react: ^0.417.0
-    next: 14.2.5
-    next-themes: ^0.3.0
-    postcss: ^8
-    react: ^18
-    react-dom: ^18
-    sonner: ^1.5.0
-    tailwind-merge: ^2.4.0
-    tailwindcss: ^3.4.1
-    tailwindcss-animate: ^1.0.7
-  languageName: unknown
-  linkType: soft
 
 "next-themes@npm:^0.2.1":
   version: 0.2.1

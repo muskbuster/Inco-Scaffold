@@ -5,7 +5,7 @@ pragma solidity ^0.8.24;
 import "fhevm/lib/TFHE.sol";
 import "@openzeppelin/contracts/access/Ownable2Step.sol";
 
-contract EncryptedERC20 is Ownable2Step {
+contract EncryptedERC is Ownable2Step {
     event Transfer(address indexed from, address indexed to);
     event Approval(address indexed owner, address indexed spender);
     event Mint(address indexed to, uint64 amount);

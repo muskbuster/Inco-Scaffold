@@ -103,3 +103,13 @@ To know more about its features, check out our [website](https://scaffoldeth.io)
 We welcome contributions to Scaffold-ETH 2!
 
 Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+
+## Changelog 
+
+- FHEVM local node works with proper ABI parsing for typescript 
+![alt text](image-1.png)
+![alt text](image-2.png)
+- NextJs template added to packages 
+![alt text](image.png)
+- Added compatibility mode for gentry testnet
+![alt text](image-3.png)
