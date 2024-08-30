@@ -10,7 +10,7 @@ Built using Hardhat-Ts
 | Run custom scripts | ✅ |
 | Deploy Contract | ✅ |
 | Devnet spin up |  |
-| Burner wallets for debugging |  |
+| Burner wallets for debugging | ✅ |
 | gentry faucet |  |
 | TFHE wiki |  |
 | Slither SA|  |
@@ -27,17 +27,17 @@ Built using Nextjs , ethersjs ,fhevmjs and typescript
 | Address bar  |  |
 | modal to copy/disconnect/view account |  |
 | Display account balance |  |
-| Switch/display network |  |
+| Switch/display network | ✅ |
 | App Light/Dark mode |  |
-| Burner wallet UI|  |
-| Read Contract Hook | |
+| Burner wallet UI| ✅ |
+| Read Contract Hook |✅ |
 |Write contract Hook| |
 
 
 ### Template Smart Contracts 
 | Feature | Available |
 | :---: | :---: |
-| Confidential Governance | |
+| Confidential Governance |✅ |
 | Confidential ERC20 |✅ |
 | Blind Vault | |
 | FHE-Casino Contracts | ✅ |
@@ -105,7 +105,7 @@ We welcome contributions to Scaffold-ETH 2!
 Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
 
 ## Changelog 
-
+### 27-08-24
 - FHEVM local node works with proper ABI parsing for typescript 
 ![alt text](image-1.png)
 ![alt text](image-2.png)
@@ -113,3 +113,10 @@ Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob
 ![alt text](image.png)
 - Added compatibility mode for gentry testnet
 ![alt text](image-3.png)
+
+### 30-08-24
+- Added template smart contracts 
+   - Blind Auction
+   - EncryptedERC20
+   - FHE-Casino
+-  Added nextjs utils for contract interaction and transaction resolution with notifications
