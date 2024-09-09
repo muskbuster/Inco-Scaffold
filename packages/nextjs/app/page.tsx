@@ -15,8 +15,15 @@ const Home: NextPage = () => {
   } = useFhevm();
   console.log(instance);
 
+  const getter = async () => {
+    const { publicKey, privateKey } = instance.generateKeypair();
+    console.log(publicKey);
+    console.log(privateKey);
+  };
+
   return (
     <>
+      <button onClick={getter}>call</button>
       <div className="flex items-center flex-col flex-grow pt-10">
         <div className="px-5">
           <h1 className="text-center">
