@@ -10,7 +10,13 @@ const nextConfig = {
     ignoreDuringBuilds: process.env.NEXT_PUBLIC_IGNORE_BUILD_ERROR === "true",
   },
   webpack: config => {
-    config.resolve.fallback = { fs: false, net: false, tls: false };
+    config.resolve.fallback = {
+      ...config.resolve.fallback, // This spreads existing fallbacks
+      "tfhe_bg.wasm": require.resolve("tfhe/tfhe_bg.wasm"),
+      fs: false,
+      net: false,
+      tls: false,
+    };
     config.externals.push("pino-pretty", "lokijs", "encoding");
     return config;
   },
