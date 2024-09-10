@@ -30,9 +30,9 @@
     "next:lint": "yarn workspace @se-2/nextjs lint",
     "next:format": "yarn workspace @se-2/nextjs format",
     "next:check-types": "yarn workspace @se-2/nextjs check-types",
-    "next:build": "yarn workspace @se-2/Nextjs build",
+    "next:build": "yarn workspace @se-2/nextjs build",
     "next:serve": "yarn workspace @se-2/nextjs serve",
-    "next:start": "yarn workspace @se-2/Nextjs start",
+    "next:start": "yarn workspace @se-2/nextjs start",
     "postinstall": "husky install",
     "precommit": "lint-staged",
     "vercel": "yarn workspace @se-2/nextjs vercel",
@@ -45,5 +45,8 @@
   },
   "engines": {
     "node": ">=18.17.0"
+  },
+  "dependencies": {
+    "fhevmjs": "^0.5.2"
   }
 }
