@@ -1,16 +1,50 @@
 import { wagmiConnectors } from "./wagmiConnectors";
-import { Chain, createClient, http } from "viem";
+import { Chain, createClient, defineChain, http } from "viem";
 import { hardhat, mainnet } from "viem/chains";
 import { createConfig } from "wagmi";
 import scaffoldConfig from "~~/scaffold.config";
 import { getAlchemyHttpUrl } from "~~/utils/scaffold-eth";
 
+export const incoNetwork = /*#__PURE__*/ defineChain({
+  id: 9090,
+  name: "Inco Gentry Testnet",
+  network: "INCO",
+  nativeCurrency: {
+    name: "INCO",
+    symbol: "INCO",
+    decimals: 18,
+  },
+  rpcUrls: {
+    default: {
+      http: ["https://testnet.inco.org/"],
+    },
+    public: {
+      http: ["https://testnet.inco.org/"],
+    },
+  },
+  blockExplorers: {
+    default: {
+      name: "Explorer",
+      url: "https://explorer.testnet.inco.org",
+    },
+  },
+});
+
 const { targetNetworks } = scaffoldConfig;
 
-// We always want to have mainnet enabled (ENS resolution, ETH price, etc). But only once.
-export const enabledChains = targetNetworks.find((network: Chain) => network.id === 1)
-  ? targetNetworks
-  : ([...targetNetworks, mainnet] as const);
+// Create a mutable array first
+const mutableEnabledChains: Chain[] = [
+  incoNetwork,
+  ...targetNetworks.filter((network: Chain) => network.id !== incoNetwork.id),
+];
+
+// Ensure mainnet is included if it's not already in the list
+if (!mutableEnabledChains.some((network: Chain) => network.id === 1)) {
+  mutableEnabledChains.push(mainnet);
+}
+
+// Convert to readonly array and enforce at least one element with tuple typing
+export const enabledChains = mutableEnabledChains as [Chain, ...Chain[]];
 
 export const wagmiConfig = createConfig({
   chains: enabledChains,
@@ -19,7 +53,7 @@ export const wagmiConfig = createConfig({
   client({ chain }) {
     return createClient({
       chain,
-      transport: http(getAlchemyHttpUrl(chain.id)),
+      transport: http(chain.id === incoNetwork.id ? incoNetwork.rpcUrls.default.http[0] : getAlchemyHttpUrl(chain.id)),
       ...(chain.id !== (hardhat as Chain).id
         ? {
             pollingInterval: scaffoldConfig.pollingInterval,
