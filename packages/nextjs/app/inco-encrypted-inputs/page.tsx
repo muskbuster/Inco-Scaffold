@@ -44,8 +44,10 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
   const { controlId, inputLabel, maxValue, inputType } = group;
   const [value, setValue] = useState<string>("");
   const [encryptedValue, setEncryptedValue] = useState<string>("");
+  const [inputProof, setInputProof] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
+  const [copiedProof, setCopiedProof] = useState<boolean>(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -57,6 +59,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
       if (numValue < 0 || numValue > Number(maxValue)) {
         setError(`Value must be between 0 and ${maxValue}`);
         setEncryptedValue("");
+        setInputProof("");
         return;
       }
     } else if (!/^0x[a-fA-F0-9]{40}$/.test(newValue)) {
@@ -98,17 +101,19 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
           throw new Error("Unsupported type");
       }
       setEncryptedValue("0x" + toHexString(encrypted.handles[0]));
+      setInputProof("0x" + toHexString(encrypted.inputProof));
     } catch (err) {
       console.error(err);
       setError("An error occurred during encryption");
       setEncryptedValue("");
+      setInputProof("");
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(encryptedValue);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = (value: string, setCopiedState: React.Dispatch<React.SetStateAction<boolean>>) => {
+    navigator.clipboard.writeText(value);
+    setCopiedState(true);
+    setTimeout(() => setCopiedState(false), 2000);
   };
 
   return (
@@ -148,7 +153,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
             className="flex-grow bg-gray-700 text-white rounded-l-md p-2 focus:ring-2 focus:ring-blue-500"
           />
           <button
-            onClick={handleCopy}
+            onClick={() => handleCopy(encryptedValue, setCopied)}
             className={`p-2 rounded-r-md transition-colors ${
               copied ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700"
             }`}
@@ -157,6 +162,30 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
           </button>
         </div>
         {copied && <p className="mt-1 text-sm text-green-400">Copied to clipboard!</p>}
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor={`${controlId}-input-proof`} className="block mb-2 text-sm font-medium text-gray-300">
+          Input Proof
+        </label>
+        <div className="flex items-center">
+          <input
+            id={`${controlId}-input-proof`}
+            type="text"
+            value={inputProof}
+            readOnly
+            className="flex-grow bg-gray-700 text-white rounded-l-md p-2 focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            onClick={() => handleCopy(inputProof, setCopiedProof)}
+            className={`p-2 rounded-r-md transition-colors ${
+              copiedProof ? "bg-green-600" : "bg-blue-600 hover:bg-blue-700"
+            }`}
+          >
+            <ClipboardIcon className="h-5 w-5 text-white" />
+          </button>
+        </div>
+        {copiedProof && <p className="mt-1 text-sm text-green-400">Input Proof copied to clipboard!</p>}
       </div>
     </div>
   );
