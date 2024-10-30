@@ -6,9 +6,9 @@ export const createFhevmInstance = async () => {
   if (!fhevmInstance) {
     await initFhevm();
     fhevmInstance = await createInstance({
-      chainId: 8009,
-      networkUrl: "https://devnet.zama.ai/",
-      gatewayUrl: "https://gateway.zama.ai/",
+      chainId: 21097,
+      networkUrl: "https://validator.rivest.inco.org/",
+      gatewayUrl: "https://gateway.rivest.inco.org/",
     });
   }
   return fhevmInstance;
