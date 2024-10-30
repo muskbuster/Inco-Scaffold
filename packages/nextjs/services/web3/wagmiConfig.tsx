@@ -6,9 +6,9 @@ import scaffoldConfig from "~~/scaffold.config";
 import { getAlchemyHttpUrl } from "~~/utils/scaffold-eth";
 
 export const incoNetwork = /*#__PURE__*/ defineChain({
-  id: 9090,
-  name: "Inco Gentry Testnet",
-  network: "INCO",
+  id: 21097,
+  name: "Rivest Testnet",
+  network: "Rivest",
   nativeCurrency: {
     name: "INCO",
     symbol: "INCO",
@@ -16,7 +16,7 @@ export const incoNetwork = /*#__PURE__*/ defineChain({
   },
   rpcUrls: {
     default: {
-      http: ["https://testnet.inco.org/"],
+      http: ["https://validator.rivest.inco.org"],
     },
     public: {
       http: ["https://testnet.inco.org/"],
@@ -25,7 +25,7 @@ export const incoNetwork = /*#__PURE__*/ defineChain({
   blockExplorers: {
     default: {
       name: "Explorer",
-      url: "https://explorer.testnet.inco.org",
+      url: "https://explorer.rivest.inco.org",
     },
   },
 });
