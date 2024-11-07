@@ -1,5 +1,5 @@
 {
-  "name": "@se-2/Hardhat",
+  "name": "@inco-scaffold/Hardhat",
   "description": "fhEVM hardhat",
   "version": "1.0.0",
   "engines": {
@@ -94,6 +94,7 @@
     "fhevm:start": "make run-full && ./scripts/fund_test_addresses_docker.sh && ./launch-fhevm.sh",
     "fhevm:stop": "make clean",
     "fhevm:restart": "fhevm:stop && fhevm:start",
+    "test:rivest": "hardhat test --network rivest",
     "fhevm:faucet": "npm run fhevm:faucet:alice && sleep 5 && npm run fhevm:faucet:bob && sleep 5 && npm run fhevm:faucet:carol && sleep 5 && npm run fhevm:faucet:dave && sleep 5 && npm run fhevm:faucet:eve",
     "fhevm:faucet:alice": "docker exec -i zama-dev-fhevm-validator-1 faucet $(npx hardhat task:getEthereumAddressAlice)",
     "fhevm:faucet:bob": "docker exec -i zama-dev-fhevm-validator-1 faucet $(npx hardhat task:getEthereumAddressBob)",

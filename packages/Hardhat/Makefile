@@ -1,4 +1,12 @@
-#!/usr/bin/make -f
+#!/usr/bin/env make -f
+
+# Preamble (see https://tech.davis-hansson.com/p/make/)
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
+.DELETE_ON_ERROR:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
 
 include .env
 
@@ -32,7 +40,7 @@ generate-fhe-keys:
 
 run-full:
 	$(MAKE) generate-fhe-keys
-	@docker compose  -f /workspaces/Inco-Scaffold/packages/Hardhat/docker-compose/docker-compose-full.yml  up --detach
+	@docker compose  -f docker-compose/docker-compose-full.yml  up --detach
 	@echo 'sleep a little to let the docker start up'
 	sleep 5
 

@@ -1,122 +1,52 @@
-
-## FEATURES
-
-### Contract Section
-Built using Hardhat-Ts
-| Feature | Available |
-| :---: | :---: |
-| Build Contract |  ✅|
-| Format Contract |  |
-| Run custom scripts | ✅ |
-| Deploy Contract | ✅ |
-| Devnet spin up |  |
-| Burner wallets for debugging | ✅ |
-| gentry faucet |  |
-| TFHE wiki |  |
-| Slither SA|  |
-| Subgraph setup| |
-
-### UI Section
-Built using Nextjs , ethersjs ,fhevmjs and typescript
-
-| Feature | Available |
-| :---: | :---: |
-| Connect button & Custom Wallet Modal | ✅ |
-|fhEVM instance |✅ |
-| Encryption and Reencryption flow | ✅ |
-| Address bar  |  |
-| modal to copy/disconnect/view account |  |
-| Display account balance |  |
-| Switch/display network | ✅ |
-| App Light/Dark mode |  |
-| Burner wallet UI| ✅ |
-| Read Contract Hook |✅ |
-|Write contract Hook| |
-
-
-### Template Smart Contracts 
-| Feature | Available |
-| :---: | :---: |
-| Confidential Governance |✅ |
-| Confidential ERC20 |✅ |
-| Blind Vault | |
-| FHE-Casino Contracts | ✅ |
-| RNG contract | |
-
-Before you begin, you need to install the following tools:
-
-- [Node (>= v18.17)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
-
-## Quickstart
-
-To get started with Scaffold-ETH 2, follow the steps below:
-
-1. Clone this repo & install dependencies
-
+# Inco Scaffold 
+Inco Scaffold is a fork of SE-2 modified to be compatible with INCO's FHE based stack.
+### Prerequisites
+Install yarn . To get started, create a `.env` file and set a BIP-39 compatible mnemonic as an environment variable.
+```sh
+cd packages/Hardhat
+cp .env.example .env
 ```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
+Install the dependencies by running 
+```sh
 yarn install
 ```
 
-2. Run a local network in the first terminal:
+### Development on Rivest Testnet
 
-```
-yarn chain
-```
+Run the pre-launch script to set up the environment:
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
-
-3. On a second terminal, deploy the test contract:
-
-```
-yarn deploy
+```sh
+sh pre-launch.sh
 ```
 
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
+This generates necessary precompile ABI files. 
 
-4. On a third terminal, start your NextJS app:
+Compile contracts with Hardhat:
 
+```sh
+yarn compile
 ```
+
+Deploy contracts on the Rivest network:
+
+```sh
+yarn deploy:contracts --network rivest
+```
+
+Run tests on the Rivest network:
+
+```sh
+yarn test:rivest
+```
+## Using nextJs template 
+
+The nextJS template supports all functionalities offered by SE-2. [See Documentation](https://docs.scaffoldeth.io/).
+The necessary details of contracts are directly written to the next template and can be invoked easily.
+
+To start development server after initial setup, run command
+```sh
 yarn start
 ```
+## Creating and using FHEVMJS
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
-
-**What's next**:
-
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend homepage at `packages/nextjs/app/page.tsx`. For guidance on [routing](https://nextjs.org/docs/app/building-your-application/routing/defining-routes) and configuring [pages/layouts](https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts) checkout the Next.js documentation.
-- Edit your deployment scripts in `packages/hardhat/deploy`
-- Edit your smart contract test in: `packages/hardhat/test`. To run test use `yarn hardhat:test`
-
-## Documentation
-
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
-
-To know more about its features, check out our [website](https://scaffoldeth.io).
-
-## Contributing to Scaffold-ETH 2
-
-We welcome contributions to Scaffold-ETH 2!
-
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
-
-## Changelog 
-### 27-08-24
-- FHEVM local node works with proper ABI parsing for typescript 
-![alt text](image-1.png)
-![alt text](image-2.png)
-- NextJs template added to packages 
-![alt text](image.png)
-- Added compatibility mode for gentry testnet
-![alt text](image-3.png)
-
-### 30-08-24
-- Added template smart contracts 
-   - Blind Auction
-   - EncryptedERC20
-   - FHE-Casino
--  Added nextjs utils for contract interaction and transaction resolution with notifications
+## Creating Encrypted inputs

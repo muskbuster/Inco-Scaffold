@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 import * as fs from "fs-extra";
 import "hardhat-deploy";
 import "hardhat-ignore-warnings";
-import type { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, extendEnvironment } from "hardhat/config";
 import { extendProvider } from "hardhat/config";
 import { task } from "hardhat/config";
 import type { NetworkUserConfig } from "hardhat/types";
@@ -11,7 +11,7 @@ import { resolve } from "path";
 import * as path from "path";
 
 import CustomProvider from "./CustomProvider";
-// Adjust the import path as needed
+import "./hardhat.config.types";
 import "./tasks/accounts";
 import "./tasks/getEthereumAddress";
 import "./tasks/taskDeploy";
@@ -21,6 +21,10 @@ import "./tasks/taskTFHE";
 extendProvider(async (provider) => {
   const newProvider = new CustomProvider(provider);
   return newProvider;
+});
+
+extendEnvironment((hre) => {
+  hre.__SOLIDITY_COVERAGE_RUNNING = false;
 });
 
 task("compile:specific", "Compiles only the specified contract")
@@ -42,15 +46,20 @@ if (!mnemonic) {
 }
 
 const chainIds = {
-  gentry: 9090,
   local: 9000,
   localNetwork1: 9000,
+  rivest: 21097,
   multipleValidatorTestnet: 8009,
 };
 
 function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
   let jsonRpcUrl: string;
+  let gatewayUrl: string = "http://localhost:7077";
   switch (chain) {
+    case "rivest":
+      jsonRpcUrl = "https://validator.rivest.inco.org";
+      gatewayUrl = "https://gateway.rivest.inco.org";
+      break;
     case "local":
       jsonRpcUrl = "http://localhost:8545";
       break;
@@ -59,9 +68,6 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
       break;
     case "multipleValidatorTestnet":
       jsonRpcUrl = "https://rpc.fhe-ethermint.zama.ai";
-      break;
-    case "gentry":
-      jsonRpcUrl = "https://testnet.inco.org";
       break;
   }
   return {
@@ -72,6 +78,7 @@ function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
     },
     chainId: chainIds[chain],
     url: jsonRpcUrl,
+    gatewayUrl,
   };
 }
 
@@ -85,7 +92,6 @@ task("test", async (taskArgs, hre, runSuper) => {
   // Run modified test task
   if (hre.network.name === "hardhat") {
     // in fhevm mode all this block is done when launching the node via `pnmp fhevm:start`
-    await hre.run("clean");
     await hre.run("compile:specific", { contract: "contracts" });
     const sourceDir = path.resolve(__dirname, "node_modules/fhevm/");
     const destinationDir = path.resolve(__dirname, "fhevmTemp/");
@@ -99,11 +105,10 @@ task("test", async (taskArgs, hre, runSuper) => {
     fs.copyFileSync(sourceFile, destinationFile);
 
     const targetAddress = "0x000000000000000000000000000000000000005d";
-    const NeverRevert = await hre.artifacts.readArtifact("MockedPrecompile");
-    const bytecode = NeverRevert.deployedBytecode;
+    const MockedPrecompile = await hre.artifacts.readArtifact("MockedPrecompile");
+    const bytecode = MockedPrecompile.deployedBytecode;
     await hre.network.provider.send("hardhat_setCode", [targetAddress, bytecode]);
     console.log(`Code of Mocked Pre-compile set at address: ${targetAddress}`);
-    fs.removeSync("fhevmTemp/");
 
     const privKeyDeployer = process.env.PRIVATE_KEY_GATEWAY_DEPLOYER;
     await hre.run("task:computePredeployAddress", { privateKey: privKeyDeployer });
@@ -140,11 +145,11 @@ const config: HardhatUserConfig = {
         path: "m/44'/60'/0'/0",
       },
     },
-    gentry: getChainConfig("gentry"),
     localDev: getChainConfig("local"),
     local: getChainConfig("local"),
     localNetwork1: getChainConfig("localNetwork1"),
     multipleValidatorTestnet: getChainConfig("multipleValidatorTestnet"),
+    rivest: getChainConfig("rivest"),
   },
   paths: {
     artifacts: "./artifacts",
@@ -160,11 +165,15 @@ const config: HardhatUserConfig = {
         // https://github.com/paulrberg/hardhat-template/issues/31
         bytecodeHash: "none",
       },
+      viaIR: true,
       // Disable the optimizer when debugging
       // https://hardhat.org/hardhat-network/#solidity-optimizer-support
       optimizer: {
         enabled: true,
-        runs: 800,
+        runs: 200,
+        details: {
+          yul: false,
+        },
       },
       evmVersion: "cancun",
     },
