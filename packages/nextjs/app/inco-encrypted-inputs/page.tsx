@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useAccount } from "wagmi";
 import { BellAlertIcon, ClipboardIcon } from "@heroicons/react/24/outline";
 import { toHexString } from "~~/components/scaffold-eth";
 import { useFhevm } from "~~/utils/fhevm/fhevm-context";
@@ -48,6 +49,7 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
   const [error, setError] = useState<string>("");
   const [copied, setCopied] = useState<boolean>(false);
   const [copiedProof, setCopiedProof] = useState<boolean>(false);
+  const { address } = useAccount();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
@@ -70,8 +72,8 @@ const GroupInput: React.FC<GroupInputProps> = ({ group, fhEVM }) => {
 
     try {
       const inputInstance = fhEVM.createEncryptedInput(
-        "0xa5e1defb98EFe38EBb2D958CEe052410247F4c80",
-        "0xc6377415Ee98A7b71161Ee963603eE52fF7750FC",
+        "0xa5e1defb98EFe38EBb2D958CEe052410247F4c80", // contract address
+        address, // user address
       );
 
       let encrypted;
